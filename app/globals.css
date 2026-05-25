@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@source "../components/**/*.tsx";
+@source "../app/**/*.tsx";
+
+/* ════════════════════════════════════════════════════════════════
+   NATIONAL SMART EMERGENCY RESPONSE SYSTEM
+   Light Professional Government Theme
+   White · Gov Blue #1d4ed8 · Emergency Red #dc2626
+════════════════════════════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-mid: #f1f5f9;
+  --surface-high: #e2e8f0;
+
+  /* Text */
+  --foreground: #0f172a;
+  --secondary: #334155;
+  --muted: #64748b;
+  --dim: #94a3b8;
+
+  /* Brand */
+  --primary: #1d4ed8;
+  --primary-light: #3b82f6;
+  --primary-pale: #eff6ff;
+  --primary-glow: rgba(29,78,216,0.15);
+  --accent: #2563eb;
+
+  /* Semantic */
+  --emergency: #dc2626;
+  --emergency-pale: #fef2f2;
+  --emergency-glow: rgba(220,38,38,0.15);
+  --success: #16a34a;
+  --success-pale: #f0fdf4;
+  --warning: #f59e0b;
+  --warning-pale: #fffbeb;
+
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  --card-shadow-hover: 0 8px 24px rgba(0,0,0,0.1), 0 2px 8px rgba(29,78,216,0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  min-height: 100vh;
+  color: var(--foreground);
+  font-family: var(--font-inter), 'Inter', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 3px; }
+
+/* ── Light Card ────────────────────────────────── */
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: rgba(29,78,216,0.3);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+/* ── Gradient Text ──────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-emergency {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animations ─────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.3); }
+  50%       { box-shadow: 0 0 14px rgba(220,38,38,0.5); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── Section Badge ──────────────────────────────── */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #eff6ff;
+  border: 1px solid rgba(29,78,216,0.2);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1d4ed8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Status Badge ───────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 5px rgba(22,163,74,0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ── Input ──────────────────────────────────────── */
+.premium-input {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 11px 16px;
+  color: #0f172a;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+}
+.premium-input:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+}
+.premium-input::placeholder { color: #94a3b8; }
+
+/* Position Jotform Agent in the top right below the header's Live Time */
+#JotformAgent-019e5b15e1607bdf82019cd4a375c3ad8887 {
+  top: 96px !important;
+  bottom: auto !important;
+  right: 40px !important;
+}
+
