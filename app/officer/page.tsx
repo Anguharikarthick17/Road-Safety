@@ -236,8 +236,8 @@ export default function OfficerDashboard() {
     <RoleGuard requiredRole="officer">
       <div style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #090e1a 0%, #05070d 100%)',
-        color: '#f8fafc',
+        background: '#f1f5f9', // Clean slate-blue background
+        color: '#0f172a',      // Dark slate primary text
         fontFamily: "'Inter', sans-serif",
         position: 'relative',
         overflowX: 'hidden'
@@ -256,9 +256,9 @@ export default function OfficerDashboard() {
           left: 0,
           right: 0,
           height: '70px',
-          background: 'rgba(9, 14, 26, 0.8)',
+          background: 'rgba(255, 255, 255, 0.9)',
           backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(59, 130, 246, 0.15)',
+          borderBottom: '1px solid #e2e8f0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -271,16 +271,16 @@ export default function OfficerDashboard() {
               width: '40px', height: '40px', borderRadius: '10px',
               background: 'linear-gradient(135deg, #ef4444, #b91c1c)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 15px rgba(239, 68, 68, 0.4)'
+              boxShadow: '0 2px 10px rgba(239, 68, 68, 0.2)'
             }}>
               <ShieldAlert size={22} color="#ffffff" />
             </div>
             <div>
-              <span style={{ fontSize: '9px', color: '#93c5fd', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', lineHeight: 1 }}>
+              <span style={{ fontSize: '9px', color: '#1d4ed8', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', lineHeight: 1 }}>
                 Smart Accident Detection &amp; Response System
               </span>
-              <h1 style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px', margin: '4px 0 0' }}>
-                SAFETY AI <span style={{ color: '#ef4444', fontSize: '11px', fontWeight: 700 }}>● COMMAND CENTER</span>
+              <h1 style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.3px', margin: '4px 0 0' }}>
+                SAFETY AI <span style={{ color: '#dc2626', fontSize: '11px', fontWeight: 700 }}>● COMMAND CENTER</span>
               </h1>
             </div>
           </div>
@@ -288,13 +288,13 @@ export default function OfficerDashboard() {
           {/* Stats Clock & Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{
-              background: 'rgba(59, 130, 246, 0.08)',
-              border: '1px solid rgba(59, 130, 246, 0.25)',
+              background: 'rgba(29, 78, 216, 0.05)',
+              border: '1px solid rgba(29, 78, 216, 0.18)',
               borderRadius: '8px',
               padding: '6px 14px',
               fontSize: '12px',
               fontWeight: 700,
-              color: '#93c5fd',
+              color: '#1d4ed8',
               display: 'flex',
               alignItems: 'center',
               gap: '6px'
@@ -306,21 +306,21 @@ export default function OfficerDashboard() {
             <button
               onClick={handleLogout}
               style={{
-                background: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid rgba(239, 68, 68, 0.25)',
+                background: 'rgba(239, 68, 68, 0.05)',
+                border: '1px solid rgba(239, 68, 68, 0.2)',
                 borderRadius: '8px',
                 padding: '8px 14px',
-                color: '#fca5a5',
+                color: '#dc2626',
                 fontSize: '12.5px',
                 fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                transition: 'background 0.2s'
+                transition: 'all 0.2s'
               }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.18)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)'}
             >
               <LogOut size={14} />
               Logout
@@ -345,7 +345,7 @@ export default function OfficerDashboard() {
                 animate={{ opacity: 1, y: 0, height: 'auto' }}
                 exit={{ opacity: 0, y: -20, height: 0 }}
                 style={{
-                  background: 'rgba(239, 68, 68, 0.15)',
+                  background: '#fef2f2',
                   border: '2px solid #ef4444',
                   borderRadius: '14px',
                   padding: '16px 20px',
@@ -353,7 +353,7 @@ export default function OfficerDashboard() {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   gap: '16px',
-                  boxShadow: '0 0 30px rgba(239, 68, 68, 0.15)'
+                  boxShadow: '0 4px 20px rgba(239, 68, 68, 0.08)'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -365,7 +365,7 @@ export default function OfficerDashboard() {
                     <AlertTriangle size={18} color="#ffffff" />
                   </div>
                   <div>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#fca5a5' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#991b1b' }}>
                       {systemAlert.msg}
                     </span>
                   </div>
@@ -373,11 +373,11 @@ export default function OfficerDashboard() {
                 <button
                   onClick={() => setSystemAlert(null)}
                   style={{
-                    background: 'rgba(255,255,255,0.08)',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    background: 'rgba(239, 68, 68, 0.08)',
+                    border: '1px solid rgba(239, 68, 68, 0.22)',
                     borderRadius: '6px',
                     padding: '4px 10px',
-                    color: '#ffffff',
+                    color: '#ef4444',
                     fontSize: '11px',
                     fontWeight: 700,
                     cursor: 'pointer'
@@ -396,41 +396,39 @@ export default function OfficerDashboard() {
             gap: '18px'
           }}>
             {[
-              { label: 'Total Accidents Today', count: totalAccidents, color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.08)', border: 'rgba(59, 130, 246, 0.2)' },
-              { label: 'Active Emergencies', count: activeEmergencies, color: '#ef4444', bg: 'rgba(239, 68, 68, 0.08)', border: 'rgba(239, 68, 68, 0.25)', pulse: true },
-              { label: 'Ambulance Assigned', count: ambulancesDispatched, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.08)', border: 'rgba(245, 158, 11, 0.2)' },
-              { label: 'Police Dispatched', count: policeDispatched, color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.08)', border: 'rgba(96, 165, 250, 0.2)' },
-              { label: 'Fire Force Dispatched', count: fireDispatched, color: '#f97316', bg: 'rgba(249, 115, 22, 0.08)', border: 'rgba(249, 115, 22, 0.2)' }
+              { label: 'Total Accidents Today', count: totalAccidents, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.05)', border: '#e2e8f0' },
+              { label: 'Active Emergencies', count: activeEmergencies, color: '#dc2626', bg: 'rgba(220, 38, 38, 0.05)', border: '#fca5a5', pulse: true },
+              { label: 'Ambulance Assigned', count: ambulancesDispatched, color: '#d97706', bg: 'rgba(217, 119, 6, 0.05)', border: '#e2e8f0' },
+              { label: 'Police Dispatched', count: policeDispatched, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.05)', border: '#e2e8f0' },
+              { label: 'Fire Force Dispatched', count: fireDispatched, color: '#ea580c', bg: 'rgba(234, 88, 12, 0.05)', border: '#e2e8f0' }
             ].map((stat, idx) => (
               <div
                 key={idx}
                 style={{
-                  background: 'rgba(15, 23, 42, 0.45)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
+                  background: '#ffffff',
                   border: `1px solid ${stat.border}`,
                   borderRadius: '16px',
                   padding: '20px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.03)'
+                  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.02)'
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '11px', color: '#475569', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                     {stat.label}
                   </span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
                     {stat.pulse && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: stat.color, animation: 'pulse 1.5s infinite' }} />}
-                    <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', margin: 0, fontVariantNumeric: 'tabular-nums' }}>
+                    <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#0f172a', margin: 0, fontVariantNumeric: 'tabular-nums' }}>
                       {stat.count}
                     </h3>
                   </div>
                 </div>
                 <div style={{
                   width: '46px', height: '46px', borderRadius: '12px',
-                  background: stat.bg, border: `1px solid ${stat.border}`,
+                  background: stat.bg, border: `1px solid ${stat.color}20`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center'
                 }}>
                   {idx === 0 && <AlertTriangle size={20} color={stat.color} />}
@@ -453,26 +451,26 @@ export default function OfficerDashboard() {
             
             {/* Left Column: Live Accident Alerts Feed */}
             <div style={{
-              background: 'rgba(15, 23, 42, 0.45)',
+              background: 'rgba(255, 255, 255, 0.85)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(59, 130, 246, 0.15)',
+              border: '1px solid #e2e8f0',
               borderRadius: '20px',
               padding: '24px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+              boxShadow: '0 8px 32px rgba(15, 23, 42, 0.04)'
             }}>
               {/* Header block */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{
                     width: '36px', height: '36px', borderRadius: '10px',
-                    background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)',
+                    background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.22)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}>
                     <Radio size={18} color="#ef4444" className="animate-pulse" />
                   </div>
                   <div>
-                    <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                    <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                       Live Accident Alerts
                     </h2>
                     <span style={{ fontSize: '11px', color: '#64748b' }}>Updated instantly via Supabase channels</span>
@@ -480,7 +478,7 @@ export default function OfficerDashboard() {
                 </div>
 
                 {/* Filter Tabs */}
-                <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '8px', padding: '3px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.04)', borderRadius: '8px', padding: '3px', border: '1px solid #e2e8f0' }}>
                   {(['all', 'active', 'resolved'] as const).map(tab => (
                     <button
                       key={tab}
@@ -489,7 +487,7 @@ export default function OfficerDashboard() {
                         padding: '6px 12px',
                         borderRadius: '6px',
                         background: activeTab === tab ? '#2563eb' : 'transparent',
-                        color: activeTab === tab ? '#ffffff' : '#94a3b8',
+                        color: activeTab === tab ? '#ffffff' : '#475569',
                         fontSize: '11.5px',
                         fontWeight: 700,
                         border: 'none',
@@ -517,8 +515,8 @@ export default function OfficerDashboard() {
                       const isExpanded = expandedCard === acc.id;
                       const isHigh = acc.severity === 'HIGH' || acc.severity === 'critical';
                       const isMedium = acc.severity === 'MEDIUM' || acc.severity === 'medium';
-                      const sevColor = isHigh ? '#ef4444' : isMedium ? '#f59e0b' : '#10b981';
-                      const sevBg = isHigh ? 'rgba(239, 68, 68, 0.12)' : isMedium ? 'rgba(245, 158, 11, 0.12)' : 'rgba(16, 185, 129, 0.12)';
+                      const sevColor = isHigh ? '#dc2626' : isMedium ? '#d97706' : '#16a34a';
+                      const sevBg = isHigh ? 'rgba(220, 38, 38, 0.06)' : isMedium ? 'rgba(217, 119, 6, 0.06)' : 'rgba(22, 163, 74, 0.06)';
                       const isResolved = acc.resolved;
 
                       return (
@@ -530,13 +528,13 @@ export default function OfficerDashboard() {
                           transition={{ duration: 0.3 }}
                           onClick={() => setExpandedCard(isExpanded ? null : acc.id)}
                           style={{
-                            background: isResolved ? 'rgba(16, 185, 129, 0.03)' : 'rgba(15, 23, 42, 0.6)',
-                            border: `1.5px solid ${isResolved ? 'rgba(16, 185, 129, 0.2)' : isHigh ? 'rgba(239, 68, 68, 0.3)' : 'rgba(59, 130, 246, 0.15)'}`,
+                            background: isResolved ? 'rgba(16, 185, 129, 0.04)' : '#ffffff',
+                            border: `1.5px solid ${isResolved ? 'rgba(16, 185, 129, 0.2)' : isHigh ? 'rgba(220, 38, 38, 0.22)' : '#e2e8f0'}`,
                             borderRadius: '16px',
                             padding: '18px',
                             cursor: 'pointer',
                             transition: 'border-color 0.2s',
-                            boxShadow: !isResolved && isHigh ? '0 0 15px rgba(239, 68, 68, 0.05)' : 'none'
+                            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.02)'
                           }}
                         >
                           {/* Top Row info */}
@@ -545,7 +543,7 @@ export default function OfficerDashboard() {
                               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '6px' }}>
                                 <span style={{
                                   background: sevBg,
-                                  border: `1px solid ${sevColor}35`,
+                                  border: `1px solid ${sevColor}30`,
                                   color: sevColor,
                                   fontSize: '10px',
                                   fontWeight: 800,
@@ -557,8 +555,8 @@ export default function OfficerDashboard() {
                                   {acc.severity} SEVERITY
                                 </span>
                                 <span style={{
-                                  background: isResolved ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-                                  color: isResolved ? '#10b981' : '#ef4444',
+                                  background: isResolved ? 'rgba(16, 185, 129, 0.15)' : 'rgba(220, 38, 38, 0.12)',
+                                  color: isResolved ? '#16a34a' : '#dc2626',
                                   fontSize: '10px',
                                   fontWeight: 800,
                                   padding: '2px 8px',
@@ -569,16 +567,16 @@ export default function OfficerDashboard() {
                                 </span>
                               </div>
 
-                              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', margin: '4px 0 8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                {!isResolved && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef4444', animation: 'pulse 1s infinite' }} />}
+                              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: '4px 0 8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                {!isResolved && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#dc2626', animation: 'pulse 1s infinite' }} />}
                                 🚨 Accident Detected
                               </h3>
 
                               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#94a3b8' }}>
-                                  <MapPin size={12} color="#3b82f6" /> {acc.location}
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#475569' }}>
+                                  <MapPin size={12} color="#1d4ed8" /> {acc.location}
                                 </span>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#94a3b8' }}>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#475569' }}>
                                   <Clock size={12} /> {new Date(acc.time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                                 </span>
                               </div>
@@ -588,8 +586,8 @@ export default function OfficerDashboard() {
                           {/* Dispatch / Unit Tracker display */}
                           {(acc.ambulance || acc.police || acc.fireforce) && (
                             <div style={{
-                              background: 'rgba(59, 130, 246, 0.05)',
-                              border: '1px solid rgba(59, 130, 246, 0.15)',
+                              background: 'rgba(29, 78, 216, 0.04)',
+                              border: '1px solid rgba(29, 78, 216, 0.12)',
                               borderRadius: '8px',
                               padding: '10px 12px',
                               marginTop: '14px',
@@ -597,22 +595,22 @@ export default function OfficerDashboard() {
                               flexDirection: 'column',
                               gap: '6px'
                             }}>
-                              <span style={{ fontSize: '11px', color: '#93c5fd', fontWeight: 700, letterSpacing: '0.04em' }}>
+                              <span style={{ fontSize: '11px', color: '#1d4ed8', fontWeight: 700, letterSpacing: '0.04em' }}>
                                 DISPATCHED RESOURCES:
                               </span>
                               <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                                 {acc.ambulance && (
-                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#fca5a5', fontWeight: 600 }}>
+                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#b91c1c', fontWeight: 600 }}>
                                     <Ambulance size={12} /> Ambulance ({acc.ambulance})
                                   </span>
                                 )}
                                 {acc.police && (
-                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#93c5fd', fontWeight: 600 }}>
+                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#1d4ed8', fontWeight: 600 }}>
                                     <Car size={12} /> Police ({acc.police})
                                   </span>
                                 )}
                                 {acc.fireforce && (
-                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#fed7aa', fontWeight: 600 }}>
+                                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#c2410c', fontWeight: 600 }}>
                                     <Flame size={12} /> Fire Force ({acc.fireforce})
                                   </span>
                                 )}
@@ -628,7 +626,7 @@ export default function OfficerDashboard() {
                                 animate={{ height: 'auto', opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.25 }}
-                                style={{ overflow: 'hidden', marginTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '14px' }}
+                                style={{ overflow: 'hidden', marginTop: '16px', borderTop: '1px solid #e2e8f0', paddingTop: '14px' }}
                               >
                                 <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, display: 'block', marginBottom: '8px', letterSpacing: '0.05em' }}>
                                   EMERGENCY ACTIONS
@@ -639,8 +637,8 @@ export default function OfficerDashboard() {
                                     onClick={e => { e.stopPropagation(); handleAssignResource(acc.id, 'ambulance'); }}
                                     disabled={!!assigning}
                                     style={{
-                                      background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)',
-                                      borderRadius: '8px', padding: '8px 12px', color: '#fca5a5', fontSize: '12px',
+                                      background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.22)',
+                                      borderRadius: '8px', padding: '8px 12px', color: '#dc2626', fontSize: '12px',
                                       fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
                                     }}
                                   >
@@ -652,8 +650,8 @@ export default function OfficerDashboard() {
                                     onClick={e => { e.stopPropagation(); handleAssignResource(acc.id, 'police'); }}
                                     disabled={!!assigning}
                                     style={{
-                                      background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)',
-                                      borderRadius: '8px', padding: '8px 12px', color: '#93c5fd', fontSize: '12px',
+                                      background: 'rgba(37, 99, 235, 0.05)', border: '1px solid rgba(37, 99, 235, 0.22)',
+                                      borderRadius: '8px', padding: '8px 12px', color: '#2563eb', fontSize: '12px',
                                       fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
                                     }}
                                   >
@@ -665,8 +663,8 @@ export default function OfficerDashboard() {
                                     onClick={e => { e.stopPropagation(); handleAssignResource(acc.id, 'fireforce'); }}
                                     disabled={!!assigning}
                                     style={{
-                                      background: 'rgba(249, 115, 22, 0.1)', border: '1px solid rgba(249, 115, 22, 0.3)',
-                                      borderRadius: '8px', padding: '8px 12px', color: '#fed7aa', fontSize: '12px',
+                                      background: 'rgba(249, 115, 22, 0.05)', border: '1px solid rgba(249, 115, 22, 0.22)',
+                                      borderRadius: '8px', padding: '8px 12px', color: '#ea580c', fontSize: '12px',
                                       fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
                                     }}
                                   >
@@ -678,8 +676,8 @@ export default function OfficerDashboard() {
                                     onClick={e => { e.stopPropagation(); handleResolveIncident(acc.id); }}
                                     disabled={!!assigning}
                                     style={{
-                                      background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.4)',
-                                      borderRadius: '8px', padding: '8px 12px', color: '#a7f3d0', fontSize: '12px',
+                                      background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.35)',
+                                      borderRadius: '8px', padding: '8px 12px', color: '#16a34a', fontSize: '12px',
                                       fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
                                       marginLeft: 'auto'
                                     }}
@@ -704,29 +702,29 @@ export default function OfficerDashboard() {
               
               {/* Google Maps / Radar Panel */}
               <div style={{
-                background: 'rgba(15, 23, 42, 0.45)',
+                background: 'rgba(255, 255, 255, 0.85)',
                 backdropFilter: 'blur(20px)',
                 WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(59, 130, 246, 0.15)',
+                border: '1px solid #e2e8f0',
                 borderRadius: '20px',
                 padding: '24px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+                boxShadow: '0 8px 32px rgba(15, 23, 42, 0.04)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Compass size={18} color="#3b82f6" />
-                    <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                    <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                       Live Emergency Map Tracker
                     </h2>
                   </div>
                   
                   {/* Map Type Switcher */}
-                  <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '6px', padding: '2px' }}>
+                  <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.04)', borderRadius: '6px', padding: '2px' }}>
                     <button
                       onClick={() => setMapType('radar')}
                       style={{
                         padding: '4px 10px', fontSize: '10.5px', fontWeight: 700, borderRadius: '4px', border: 'none', cursor: 'pointer',
-                        background: mapType === 'radar' ? '#2563eb' : 'transparent', color: mapType === 'radar' ? '#ffffff' : '#94a3b8'
+                        background: mapType === 'radar' ? '#2563eb' : 'transparent', color: mapType === 'radar' ? '#ffffff' : '#475569'
                       }}
                     >
                       Radar View
@@ -735,7 +733,7 @@ export default function OfficerDashboard() {
                       onClick={() => setMapType('google')}
                       style={{
                         padding: '4px 10px', fontSize: '10.5px', fontWeight: 700, borderRadius: '4px', border: 'none', cursor: 'pointer',
-                        background: mapType === 'google' ? '#2563eb' : 'transparent', color: mapType === 'google' ? '#ffffff' : '#94a3b8'
+                        background: mapType === 'google' ? '#2563eb' : 'transparent', color: mapType === 'google' ? '#ffffff' : '#475569'
                       }}
                     >
                       Google Maps
@@ -744,27 +742,27 @@ export default function OfficerDashboard() {
                 </div>
 
                 {/* Map Display area */}
-                <div style={{ background: '#070b13', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', height: '340px', overflow: 'hidden', position: 'relative' }}>
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', height: '340px', overflow: 'hidden', position: 'relative' }}>
                   {mapType === 'radar' ? (
                     // Vector Tactical Radar Grid Map
                     <div style={{ width: '100%', height: '100%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {/* Grid Background */}
                       <div style={{
                         position: 'absolute', inset: 0,
-                        backgroundImage: 'radial-gradient(rgba(37, 99, 235, 0.15) 1px, transparent 0), radial-gradient(rgba(37, 99, 235, 0.1) 2px, transparent 0)',
+                        backgroundImage: 'radial-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 0), radial-gradient(rgba(37, 99, 235, 0.05) 2px, transparent 0)',
                         backgroundSize: '24px 24px', opacity: 0.6
                       }} />
 
                       {/* Moving radar scanning sweeps */}
                       <div style={{
                         position: 'absolute', width: '280px', height: '280px', borderRadius: '50%',
-                        border: '1.5px dashed rgba(59, 130, 246, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        border: '1.5px dashed rgba(59, 130, 246, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center'
                       }}>
-                        <div style={{ position: 'absolute', width: '180px', height: '180px', borderRadius: '50%', border: '1px solid rgba(59, 130, 246, 0.15)' }} />
-                        <div style={{ position: 'absolute', width: '80px', height: '80px', borderRadius: '50%', border: '1px solid rgba(59, 130, 246, 0.1)' }} />
+                        <div style={{ position: 'absolute', width: '180px', height: '180px', borderRadius: '50%', border: '1px solid rgba(59, 130, 246, 0.1)' }} />
+                        <div style={{ position: 'absolute', width: '80px', height: '80px', borderRadius: '50%', border: '1px solid rgba(59, 130, 246, 0.08)' }} />
                         <div style={{
                           position: 'absolute', inset: 0, borderRadius: '50%',
-                          background: 'conic-gradient(from 0deg, rgba(37, 99, 235, 0.08) 0deg, transparent 90deg)',
+                          background: 'conic-gradient(from 0deg, rgba(37, 99, 235, 0.05) 0deg, transparent 90deg)',
                           animation: 'spinRadar 8s linear infinite'
                         }} />
                       </div>
@@ -785,15 +783,15 @@ export default function OfficerDashboard() {
                           >
                             <span style={{
                               width: '12px', height: '12px', borderRadius: '50%',
-                              background: acc.resolved ? '#10b981' : '#ef4444',
+                              background: acc.resolved ? '#16a34a' : '#dc2626',
                               display: 'block',
-                              boxShadow: acc.resolved ? '0 0 10px #10b981' : '0 0 15px #ef4444',
+                              boxShadow: acc.resolved ? '0 0 8px rgba(22, 163, 74, 0.2)' : '0 0 10px rgba(220, 38, 38, 0.2)',
                               animation: acc.resolved ? 'none' : 'pulse 1.2s infinite'
                             }} />
                             <div style={{
-                              position: 'absolute', left: '16px', top: '-6px', background: 'rgba(15,23,42,0.85)',
+                              position: 'absolute', left: '16px', top: '-6px', background: 'rgba(255, 255, 255, 0.95)',
                               padding: '2px 6px', borderRadius: '4px', fontSize: '9px', fontWeight: 700,
-                              whiteSpace: 'nowrap', border: '1px solid rgba(255,255,255,0.1)'
+                              whiteSpace: 'nowrap', border: '1px solid #cbd5e1', color: '#0f172a'
                             }}>
                               {acc.location}
                             </div>
@@ -817,17 +815,17 @@ export default function OfficerDashboard() {
 
               {/* District Emergency Dispatch Nodes logs */}
               <div style={{
-                background: 'rgba(15, 23, 42, 0.45)',
+                background: 'rgba(255, 255, 255, 0.85)',
                 backdropFilter: 'blur(20px)',
                 WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(59, 130, 246, 0.15)',
+                border: '1px solid #e2e8f0',
                 borderRadius: '20px',
                 padding: '24px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
+                boxShadow: '0 8px 32px rgba(15, 23, 42, 0.04)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
                   <Bell size={18} color="#3b82f6" />
-                  <h2 style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                  <h2 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                     Emergency Logs Feed
                   </h2>
                 </div>
@@ -839,10 +837,10 @@ export default function OfficerDashboard() {
                       style={{
                         padding: '8px 12px',
                         borderRadius: '8px',
-                        background: 'rgba(15, 23, 42, 0.4)',
-                        borderLeft: `3px solid ${acc.resolved ? '#10b981' : '#ef4444'}`,
+                        background: '#f8fafc',
+                        borderLeft: `3px solid ${acc.resolved ? '#16a34a' : '#dc2626'}`,
                         fontSize: '11.5px',
-                        color: '#cbd5e1'
+                        color: '#334155'
                       }}
                     >
                       {acc.resolved ? (
