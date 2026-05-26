@@ -80,6 +80,30 @@ export default function OfficerDashboard() {
     }
   };
 
+  // Synthesize Text-to-Speech AI Announcement
+  const speakAlert = (location: string, severity: string) => {
+    try {
+      if (typeof window === 'undefined' || !window.speechSynthesis) return;
+      // Stop any active speech to avoid overlaps
+      window.speechSynthesis.cancel();
+      
+      const message = `Warning. Emergency alert. A ${severity.toLowerCase()} severity accident has been detected at ${location}. Dispatched units are required immediately.`;
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.rate = 0.95; // Slightly slower for clear notification
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      const voices = window.speechSynthesis.getVoices();
+      // Look for a professional sounding voice
+      const selectVoice = voices.find(v => v.lang.includes('en-IN') || v.lang.includes('en-GB') || v.lang.includes('en-US'));
+      if (selectVoice) utterance.voice = selectVoice;
+      
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn('Speech synthesis fail:', e);
+    }
+  };
+
   // Fetch from Supabase with 2s polling backup for extreme resilience
   const fetchAccidents = async (isInitial = false) => {
     try {
@@ -115,6 +139,7 @@ export default function OfficerDashboard() {
               type: newIncident.severity
             });
             playSiren();
+            speakAlert(newIncident.location, newIncident.severity);
           }
         }
 
@@ -302,6 +327,66 @@ export default function OfficerDashboard() {
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', animation: 'pulse 1.8s infinite' }} />
               LIVE IST: <span style={{ fontVariantNumeric: 'tabular-nums' }}>{currentTime || '00:00:00'}</span>
             </div>
+
+            <button
+              onClick={() => speakAlert("Chennai Highway", "HIGH")}
+              style={{
+                background: 'rgba(29, 78, 216, 0.05)',
+                border: '1px solid rgba(29, 78, 216, 0.18)',
+                borderRadius: '8px',
+                padding: '8px 14px',
+                color: '#1d4ed8',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(29, 78, 216, 0.1)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(29, 78, 216, 0.05)'}
+            >
+              <Volume2 size={14} />
+              Test Voice
+            </button>
+
+            <button
+              onClick={async () => {
+                try {
+                  await fetch('/api/accident', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      status: 'ACCIDENT',
+                      location: 'Chennai Highway',
+                      severity: 'HIGH'
+                    })
+                  });
+                } catch (err) {
+                  console.error('Simulated trigger failed:', err);
+                }
+              }}
+              style={{
+                background: 'rgba(234, 88, 12, 0.05)',
+                border: '1px solid rgba(234, 88, 12, 0.18)',
+                borderRadius: '8px',
+                padding: '8px 14px',
+                color: '#ea580c',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(234, 88, 12, 0.1)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(234, 88, 12, 0.05)'}
+            >
+              <Radio size={14} />
+              Simulate IoT
+            </button>
 
             <button
               onClick={() => router.push('/')}
