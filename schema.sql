@@ -119,3 +119,29 @@ ALTER TABLE public.shops DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ai_alerts DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.notifications DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.hotspots DISABLE ROW LEVEL SECURITY;
+
+-- 6. Create Accidents Table
+CREATE TABLE IF NOT EXISTS public.accidents (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  status text DEFAULT 'ACCIDENT' NOT NULL,
+  location text NOT NULL,
+  severity text DEFAULT 'HIGH' NOT NULL,
+  time timestamp with time zone DEFAULT now() NOT NULL,
+  ambulance text,
+  police text,
+  fireforce text,
+  resolved boolean DEFAULT false NOT NULL,
+  created_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+-- Seed Accidents
+INSERT INTO public.accidents (status, location, severity, ambulance, police, fireforce, resolved) VALUES
+  ('ACCIDENT', 'Chennai Highway', 'HIGH', NULL, NULL, NULL, false),
+  ('ASSIGNED', 'OMR Road near Sholinganallur', 'MEDIUM', 'AMB-05', 'PCL-12', NULL, false),
+  ('RESOLVED', 'GST Road, Tambaram', 'LOW', 'AMB-02', 'PCL-01', 'FRU-09', true);
+
+-- Enable Realtime for accidents table
+alter publication supabase_realtime add table public.accidents;
+
+-- Disable RLS on accidents table
+ALTER TABLE public.accidents DISABLE ROW LEVEL SECURITY;

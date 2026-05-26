@@ -20,7 +20,11 @@ export default function RoleGuard({ requiredRole, children }: RoleGuardProps) {
     if (role === requiredRole && token) {
       setAuthorized(true);
     } else {
-      router.replace('/');
+      if (requiredRole === 'officer') {
+        router.replace('/officer/login');
+      } else {
+        router.replace('/');
+      }
     }
     setChecking(false);
   }, [requiredRole, router]);
