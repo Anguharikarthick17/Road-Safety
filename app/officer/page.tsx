@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield, AlertTriangle, Ambulance, Car, Flame, CheckCircle,
   LogOut, Bell, MapPin, Clock, Info, ShieldAlert,
-  Volume2, RefreshCw, Layers, Compass, Plus, Send, Radio
+  Volume2, RefreshCw, Layers, Compass, Plus, Send, Radio, ArrowLeft
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import RoleGuard from '@/components/shared/RoleGuard';
@@ -302,6 +302,29 @@ export default function OfficerDashboard() {
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', animation: 'pulse 1.8s infinite' }} />
               LIVE IST: <span style={{ fontVariantNumeric: 'tabular-nums' }}>{currentTime || '00:00:00'}</span>
             </div>
+
+            <button
+              onClick={() => router.push('/')}
+              style={{
+                background: 'rgba(71, 85, 105, 0.05)',
+                border: '1px solid rgba(71, 85, 105, 0.18)',
+                borderRadius: '8px',
+                padding: '8px 14px',
+                color: '#475569',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(71, 85, 105, 0.1)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(71, 85, 105, 0.05)'}
+            >
+              <ArrowLeft size={14} />
+              Back
+            </button>
 
             <button
               onClick={handleLogout}
