@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, LogOut, Bell, Shield, BarChart2, Clock, UserCircle, Activity } from 'lucide-react';
 import { logout, getRole, type Role } from '@/lib/auth';
+import LanguageSelector from '@/components/shared/LanguageSelector';
 
 const roleConfig: Record<Role, { label: string; color: string; bg: string; border: string; icon: typeof Shield }> = {
   officer:    { label: 'Officer',    color: '#dc2626', bg: '#fef2f2', border: '#fecaca', icon: Shield },
@@ -132,6 +133,7 @@ export default function DashboardNavbar({ notificationCount = 0, theme = 'light'
 
         {/* Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <LanguageSelector />
           <div style={{ position: 'relative' }}>
             <button style={{ width: '36px', height: '36px', borderRadius: '8px', background: bellBg, border: bellBorder, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: bellColor }}>
               <Bell size={15} />

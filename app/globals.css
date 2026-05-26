@@ -181,3 +181,32 @@ body {
   right: 40px !important;
 }
 
+/* ── Google Translate Premium Styling Overrides ── */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0px !important;
+}
+.goog-te-balloon-frame {
+  display: none !important;
+}
+.goog-tooltip {
+  display: none !important;
+}
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Ensure translating iframe popup elements are hidden */
+iframe[class*="goog"] {
+  display: none !important;
+}
+

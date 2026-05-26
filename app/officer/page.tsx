@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import RoleGuard from '@/components/shared/RoleGuard';
+import LanguageSelector from '@/components/shared/LanguageSelector';
 
 interface Accident {
   id: string;
@@ -312,6 +313,7 @@ export default function OfficerDashboard() {
 
           {/* Stats Clock & Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <LanguageSelector />
             <div style={{
               background: 'rgba(29, 78, 216, 0.05)',
               border: '1px solid rgba(29, 78, 216, 0.18)',

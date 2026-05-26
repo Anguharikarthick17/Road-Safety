@@ -13,6 +13,7 @@ import {
   Tooltip, LineChart, Line, CartesianGrid, Legend
 } from 'recharts';
 import { login, type Role } from '@/lib/auth';
+import LanguageSelector from '@/components/shared/LanguageSelector';
 
 const ROLES = [
   {
@@ -348,34 +349,39 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Live Clock HUD */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-          background: 'rgba(255, 255, 255, 0.85)',
-          border: '1px solid rgba(29, 78, 216, 0.15)',
-          boxShadow: '0 4px 12px rgba(29, 78, 216, 0.05), inset 0 1px 0 rgba(255,255,255,0.6)',
-          borderRadius: '10px',
-          padding: '8px 16px',
-          fontSize: '13px',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{
-              width: '7px',
-              height: '7px',
-              borderRadius: '50%',
-              background: '#16a34a',
-              display: 'inline-block',
-              boxShadow: '0 0 8px #16a34a',
-              animation: 'livePulse 2s ease-in-out infinite'
-            }} />
-            <span style={{ fontWeight: 800, color: '#16a34a', letterSpacing: '0.05em' }}>LIVE IST</span>
+        {/* Right Header Actions: Language + Clock */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <LanguageSelector />
+
+          {/* Live Clock HUD */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+            background: 'rgba(255, 255, 255, 0.85)',
+            border: '1px solid rgba(29, 78, 216, 0.15)',
+            boxShadow: '0 4px 12px rgba(29, 78, 216, 0.05), inset 0 1px 0 rgba(255,255,255,0.6)',
+            borderRadius: '10px',
+            padding: '8px 16px',
+            fontSize: '13px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: '#16a34a',
+                display: 'inline-block',
+                boxShadow: '0 0 8px #16a34a',
+                animation: 'livePulse 2s ease-in-out infinite'
+              }} />
+              <span style={{ fontWeight: 800, color: '#16a34a', letterSpacing: '0.05em' }}>LIVE IST</span>
+            </div>
+            <div style={{ width: '1px', height: '16px', background: 'rgba(15,23,42,0.1)' }} />
+            <div style={{ color: '#0f172a', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{currentTime || '00:00:00'}</div>
+            <div style={{ width: '1px', height: '16px', background: 'rgba(15,23,42,0.1)' }} />
+            <div style={{ color: '#475569', fontSize: '11px', fontWeight: 600 }}>{currentDate || 'Loading...'}</div>
           </div>
-          <div style={{ width: '1px', height: '16px', background: 'rgba(15,23,42,0.1)' }} />
-          <div style={{ color: '#0f172a', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{currentTime || '00:00:00'}</div>
-          <div style={{ width: '1px', height: '16px', background: 'rgba(15,23,42,0.1)' }} />
-          <div style={{ color: '#475569', fontSize: '11px', fontWeight: 600 }}>{currentDate || 'Loading...'}</div>
         </div>
       </header>
 

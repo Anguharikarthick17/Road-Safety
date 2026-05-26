@@ -41,6 +41,32 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} dark`}>
       <body className="antialiased" style={{ fontFamily: "var(--font-inter), 'Inter', sans-serif" }}>
         {children}
+        
+        {/* Hidden Google Translate Target */}
+        <div id="google_translate_element" style={{ display: "none" }} />
+        
+        {/* Google Translate Init Script */}
+        <Script
+          id="google-translate-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                  pageLanguage: 'en',
+                  includedLanguages: 'en,ta,hi,ml,te',
+                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                  autoDisplay: false
+                }, 'google_translate_element');
+              }
+            `
+          }}
+        />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+
         <Script
           src="https://cdn.jotfor.ms/agent/embedjs/019e5b15e1607bdf82019cd4a375c3ad8887/embed.js?autoOpenChatIn=1"
           strategy="afterInteractive"
