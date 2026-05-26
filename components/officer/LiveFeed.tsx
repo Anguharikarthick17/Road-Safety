@@ -52,6 +52,39 @@ export default function LiveFeed() {
   const [assignments, setAssignments] = useState<Record<string, AssignmentState>>({});
   const [assigning, setAssigning] = useState<string | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [sensorAlert, setSensorAlert] = useState<Incident | null>(null);
+
+  const playSiren = () => {
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      
+      const playTone = (freq: number, start: number, duration: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.35, start + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.01, start + duration);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+      };
+
+      // Siren warning: two pairs of high/low tones
+      playTone(987.77, ctx.currentTime, 0.45);
+      playTone(987.77, ctx.currentTime + 0.20, 0.45);
+      playTone(783.99, ctx.currentTime + 0.55, 0.45);
+      playTone(783.99, ctx.currentTime + 0.75, 0.45);
+    } catch (e) {
+      console.error('Audio synthesis failed:', e);
+    }
+  };
 
   // Load incidents from Supabase & Subscribe to real-time changes
   useEffect(() => {
@@ -127,6 +160,16 @@ export default function LiveFeed() {
               if (prev.some(x => x.id === newIncident.id)) return prev;
               return [newIncident, ...prev];
             });
+
+            // Trigger visual warning overlay / banner if crash sensor detected an accident
+            const isSensorIncident = 
+              (newIncident.type && newIncident.type.includes('Sensor')) || 
+              (newIncident.vehicle && newIncident.vehicle.includes('Sensor'));
+            
+            if (isSensorIncident) {
+              setSensorAlert(newIncident);
+              playSiren();
+            }
           } else if (payload.eventType === 'UPDATE') {
             const updatedItem = payload.new;
             setIncidents(prev => prev.map(inc => {
@@ -228,6 +271,106 @@ export default function LiveFeed() {
       height: '100%',
       boxShadow: '0 4px 20px rgba(15, 23, 42, 0.03)',
     }}>
+      {/* Sensor Warning Banner */}
+      <AnimatePresence>
+        {sensorAlert && (
+          <motion.div
+            key="sensor-alert-banner"
+            initial={{ opacity: 0, y: -20, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -20, height: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              background: '#fef2f2',
+              border: '2px solid #ef4444',
+              borderRadius: '12px',
+              padding: '16px',
+              marginBottom: '20px',
+              overflow: 'hidden',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', flex: 1, minWidth: 0 }}>
+                <div style={{
+                  width: '36px', height: '36px', borderRadius: '10px',
+                  background: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                }}>
+                  <TriangleAlert size={18} color="#ffffff" />
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ color: '#991b1b', fontWeight: 800, fontSize: '14px', letterSpacing: '-0.2px' }}>
+                      CRITICAL ACCIDENT OCCURRED!
+                    </span>
+                    <span style={{
+                      background: '#ef4444', color: '#ffffff', fontSize: '9px', fontWeight: 900,
+                      padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em'
+                    }}>
+                      IoT Sensor Alert
+                    </span>
+                  </div>
+                  <div style={{ color: '#7f1d1d', fontSize: '12px', marginTop: '4px', fontWeight: 500, lineHeight: 1.4 }}>
+                    A high-impact crash has been detected at <strong style={{ color: '#991b1b' }}>{sensorAlert.location}</strong> involving <strong style={{ color: '#991b1b' }}>{sensorAlert.vehicle}</strong>. Immediate dispatch required.
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+                <button
+                  onClick={() => {
+                    setExpanded(sensorAlert.id);
+                    setTimeout(() => {
+                      const el = document.getElementById(`incident-${sensorAlert.id}`);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }
+                    }, 100);
+                  }}
+                  style={{
+                    background: '#ef4444',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '8px 14px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseOver={e => e.currentTarget.style.background = '#dc2626'}
+                  onMouseOut={e => e.currentTarget.style.background = '#ef4444'}
+                >
+                  Respond & Dispatch
+                </button>
+                <button
+                  onClick={() => setSensorAlert(null)}
+                  style={{
+                    background: '#fee2e2',
+                    color: '#991b1b',
+                    border: '1px solid #fca5a5',
+                    borderRadius: '8px',
+                    padding: '8px 14px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border-color 0.2s',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.background = '#fcd3d3';
+                    e.currentTarget.style.borderColor = '#f87171';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.background = '#fee2e2';
+                    e.currentTarget.style.borderColor = '#fca5a5';
+                  }}
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -243,10 +386,54 @@ export default function LiveFeed() {
             <div style={{ color: '#64748b', fontSize: '11px' }}>Auto-updating every 8 seconds</div>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px rgba(34,197,94,0.8)', animation: 'liveDot 1.8s ease-in-out infinite', display: 'inline-block' }} />
-          <span style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>LIVE</span>
-          <span style={{ color: '#475569', fontSize: '12px' }}>· {incidents.length} incidents</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button
+            onClick={async (e) => {
+              e.stopPropagation();
+              try {
+                const response = await fetch('/api/sensor', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    sound: 94.0,
+                    vibration: 2.8,
+                    location: 'OMR near Sholinganallur',
+                    vehicle: 'Audi A4 (Simulated Sensor)',
+                    lat: 12.82,
+                    lng: 80.21
+                  })
+                });
+                const resData = await response.json();
+                console.log('Simulated sensor payload submitted:', resData);
+              } catch (err) {
+                console.error('Sensor simulation API call failed:', err);
+              }
+            }}
+            style={{
+              background: '#f1f5f9',
+              border: '1px solid #cbd5e1',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#475569',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              transition: 'background 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#e2e8f0'}
+            onMouseOut={e => e.currentTarget.style.background = '#f1f5f9'}
+          >
+            <Zap size={11} color="#eab308" style={{ fill: '#eab308' }} />
+            Simulate IoT Trigger
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', animation: 'liveDot 1.8s ease-in-out infinite', display: 'inline-block' }} />
+            <span style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>LIVE</span>
+            <span style={{ color: '#475569', fontSize: '12px' }}>· {incidents.length} incidents</span>
+          </div>
         </div>
       </div>
 
@@ -263,6 +450,7 @@ export default function LiveFeed() {
             return (
               <motion.div
                 key={inc.id}
+                id={`incident-${inc.id}`}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
