@@ -183,13 +183,23 @@ export default function LiveFeed() {
     const unit = `${cfg.prefix}-${String(Math.floor(Math.random() * 20) + 1).padStart(2, '0')}`;
     const etaMins = Math.floor(Math.random() * 10) + 3;
 
+    // Check existing assignments to build a combined list
+    const currentIncident = incidents.find(x => x.id === incId);
+    let newAssigned = unit;
+    if (currentIncident && currentIncident.assigned) {
+      const existingUnits = currentIncident.assigned.split(',').map(x => x.trim());
+      // Filter out units of the same type prefix so we replace the specific unit type instead of duplicating
+      const otherUnits = existingUnits.filter(x => !x.startsWith(cfg.prefix));
+      newAssigned = [...otherUnits, unit].join(', ');
+    }
+
     if (incId.length > 10) {
       try {
         const { error } = await supabase
           .from('incidents')
           .update({
             status: 'assigned',
-            assigned: unit,
+            assigned: newAssigned,
             eta: `${etaMins} min`
           })
           .eq('id', incId);
@@ -204,7 +214,7 @@ export default function LiveFeed() {
     setTimeout(() => {
       setAssignments(prev => ({ ...prev, [incId]: { type, unit, eta: `${etaMins} min` } }));
       setIncidents(prev => prev.map(inc =>
-        inc.id === incId ? { ...inc, status: 'assigned' as IncidentStatus, assigned: unit, eta: `${etaMins} min` } : inc
+        inc.id === incId ? { ...inc, status: 'assigned' as IncidentStatus, assigned: newAssigned, eta: `${etaMins} min` } : inc
       ));
       setAssigning(null);
     }, 1800);
