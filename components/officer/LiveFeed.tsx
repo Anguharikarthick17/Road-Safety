@@ -259,12 +259,9 @@ export default function LiveFeed() {
                 whileHover={{ border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color : 'rgba(15, 23, 42, 0.15)'}` }}
                 style={{
                   background: `linear-gradient(135deg, ${sev.bg}, rgba(255, 255, 255, 0.8))`,
-                  border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color + '50' : '#e2e8f0'}`,
+                  border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color + '70' : '#e2e8f0'}`,
                   borderRadius: '16px', padding: '16px',
-                  boxShadow: isCritical && inc.status === 'pending'
-                    ? `0 0 20px ${sev.glow}`
-                    : '0 4px 16px rgba(0,0,0,0.03)',
-                  animation: isCritical && inc.status === 'pending' ? 'incidentPulse 2.5s ease-in-out infinite' : 'none',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
                   cursor: 'pointer',
                   transition: 'border-color 0.25s, box-shadow 0.25s',
                 }}

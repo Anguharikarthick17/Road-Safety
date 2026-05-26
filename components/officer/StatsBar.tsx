@@ -58,17 +58,16 @@ export default function StatsBar() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              whileHover={{ y: -3, border: `1px solid ${card.color}35`, boxShadow: `0 10px 24px ${card.color}10` }}
+              whileHover={{ y: -2, border: `1px solid ${card.color}40` }}
               style={{
                 background: '#ffffff',
                 border: '1px solid rgba(15, 23, 42, 0.08)',
                 borderRadius: '12px', padding: '18px 16px',
                 position: 'relative', overflow: 'hidden',
-                boxShadow: card.pulse ? `0 4px 16px ${card.color}08` : '0 2px 8px rgba(0,0,0,0.03)',
-                transition: 'all 0.3s ease',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                transition: 'all 0.25s ease',
               }}
             >
-              <div style={{ position: 'absolute', top: '-25px', right: '-25px', width: '65px', height: '65px', borderRadius: '50%', background: `${card.color}10`, filter: 'blur(16px)', zIndex: 0 }} />
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', position: 'relative', zIndex: 1 }}>
                 <div style={{
                   width: '34px', height: '34px', borderRadius: '10px',
@@ -78,7 +77,7 @@ export default function StatsBar() {
                   <Icon size={16} color={card.color} />
                 </div>
                 {card.pulse && (
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: card.color, boxShadow: `0 0 8px ${card.color}`, animation: 'dot 1.5s ease-in-out infinite', display: 'inline-block' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: card.color, animation: 'dot 1.5s ease-in-out infinite', display: 'inline-block' }} />
                 )}
               </div>
               <div style={{ color: card.color, fontWeight: 900, fontSize: '28px', lineHeight: 1, marginBottom: '4px', fontVariantNumeric: 'tabular-nums', position: 'relative', zIndex: 1 }}>

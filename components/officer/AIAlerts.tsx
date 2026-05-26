@@ -123,8 +123,8 @@ export default function AIAlerts() {
         padding: '14px 20px',
         display: 'flex', alignItems: 'center', gap: '14px',
         marginBottom: '20px', position: 'relative',
-        boxShadow: current.severity === 'critical' ? `0 4px 16px rgba(239,68,68,0.15)` : 'none',
-        animation: current.severity === 'critical' ? 'aiAlertPulse 2.5s ease-in-out infinite' : 'none',
+        boxShadow: 'none',
+        animation: 'none',
       }}
     >
       <div style={{

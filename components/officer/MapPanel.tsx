@@ -116,7 +116,7 @@ export default function MapPanel() {
         border: '1px solid rgba(59,130,246,0.2)',
         borderRadius: '14px', overflow: 'hidden',
         marginBottom: '14px',
-        boxShadow: '0 0 15px rgba(59,130,246,0.05)',
+        boxShadow: 'none',
       }}>
         {/* Grid lines */}
         <div style={{
@@ -155,8 +155,7 @@ export default function MapPanel() {
             <div style={{
               width: '14px', height: '14px', borderRadius: '50%',
               background: severityColor[inc.severity],
-              boxShadow: `0 0 12px ${severityColor[inc.severity]}`,
-              animation: inc.severity === 'critical' ? 'incPulse 1.5s ease-in-out infinite' : 'none',
+              border: '1.5px solid #ffffff',
             }} />
             <div style={{
               position: 'absolute', top: '-22px', left: '50%', transform: 'translateX(-50%)',
@@ -215,7 +214,7 @@ export default function MapPanel() {
                 width: '22px', height: '22px', borderRadius: '50%',
                 background: `${v.color}25`, border: `1.5px solid ${v.color}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: `0 0 10px ${v.color}60`,
+                boxShadow: 'none',
               }}>
                 <cfg.Icon size={11} color={v.color} />
               </div>

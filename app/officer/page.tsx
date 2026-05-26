@@ -14,10 +14,8 @@ function OfficerDashboardContent() {
     <div style={{ minHeight: '100vh', background: '#f8fafc', overflowX: 'hidden', color: '#0f172a' }}>
       <DashboardNavbar notificationCount={5} theme="light" />
 
-      {/* Background glows */}
+      {/* Background grid */}
       <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
-        <div style={{ position: 'absolute', top: '10%', left: '5%', width: '600px', height: '600px', borderRadius: '50%', background: 'rgba(29,78,216,0.03)', filter: 'blur(140px)' }} />
-        <div style={{ position: 'absolute', bottom: '15%', right: '5%', width: '500px', height: '500px', borderRadius: '50%', background: 'rgba(220,38,38,0.02)', filter: 'blur(140px)' }} />
         <div style={{ position: 'absolute', inset: 0, opacity: 0.015, backgroundImage: 'linear-gradient(rgba(148,163,184,1) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,1) 1px,transparent 1px)', backgroundSize: '52px 52px' }} />
       </div>
 
