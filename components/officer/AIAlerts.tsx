@@ -117,14 +117,13 @@ export default function AIAlerts() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       style={{
-        background: `linear-gradient(90deg, ${severityStyle.bg}, rgba(15, 23, 42, 0.75))`,
-        backdropFilter: 'blur(10px)',
+        background: severityStyle.bg,
         border: `1px solid ${severityStyle.border}`,
         borderRadius: '14px',
         padding: '14px 20px',
         display: 'flex', alignItems: 'center', gap: '14px',
         marginBottom: '20px', position: 'relative',
-        boxShadow: current.severity === 'critical' ? `0 0 24px rgba(239,68,68,0.2), inset 0 0 10px rgba(255,255,255,0.01)` : 'inset 0 0 8px rgba(255,255,255,0.01)',
+        boxShadow: current.severity === 'critical' ? `0 4px 16px rgba(239,68,68,0.15)` : 'none',
         animation: current.severity === 'critical' ? 'aiAlertPulse 2.5s ease-in-out infinite' : 'none',
       }}
     >
@@ -149,8 +148,8 @@ export default function AIAlerts() {
       </div>
 
       <div style={{ flex: 1, minWidth: 0 }}>
-        <span style={{ color: '#ffffff', fontSize: '13px', fontWeight: 600 }}>{current.msg}</span>
-        <span style={{ color: '#94a3b8', fontSize: '12px', marginLeft: '10px' }}>{current.time}</span>
+        <span style={{ color: '#0f172a', fontSize: '13px', fontWeight: 600 }}>{current.msg}</span>
+        <span style={{ color: '#475569', fontSize: '12px', marginLeft: '10px' }}>{current.time}</span>
       </div>
 
       {/* Alert counter */}
@@ -166,7 +165,7 @@ export default function AIAlerts() {
         </div>
         <button
           onClick={() => setDismissed(d => [...d, current.id])}
-          style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '4px', borderRadius: '6px' }}
+          style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '4px', borderRadius: '6px' }}
         >
           <X size={14} />
         </button>

@@ -58,34 +58,33 @@ export default function StatsBar() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              whileHover={{ y: -3, border: `1px solid ${card.color}45`, boxShadow: `0 8px 24px ${card.color}15, inset 0 0 12px rgba(255,255,255,0.03)` }}
+              whileHover={{ y: -3, border: `1px solid ${card.color}35`, boxShadow: `0 10px 24px ${card.color}10` }}
               style={{
-                background: 'rgba(15, 23, 42, 0.65)',
-                backdropFilter: 'blur(12px)',
-                border: `1px solid ${card.color}22`,
+                background: '#ffffff',
+                border: '1px solid rgba(15, 23, 42, 0.08)',
                 borderRadius: '12px', padding: '18px 16px',
                 position: 'relative', overflow: 'hidden',
-                boxShadow: card.pulse ? `0 4px 16px ${card.color}10, inset 0 0 8px rgba(255,255,255,0.02)` : 'inset 0 0 8px rgba(255,255,255,0.02)',
+                boxShadow: card.pulse ? `0 4px 16px ${card.color}08` : '0 2px 8px rgba(0,0,0,0.03)',
                 transition: 'all 0.3s ease',
               }}
             >
-              <div style={{ position: 'absolute', top: '-25px', right: '-25px', width: '65px', height: '65px', borderRadius: '50%', background: `${card.color}18`, filter: 'blur(16px)', zIndex: 0 }} />
+              <div style={{ position: 'absolute', top: '-25px', right: '-25px', width: '65px', height: '65px', borderRadius: '50%', background: `${card.color}10`, filter: 'blur(16px)', zIndex: 0 }} />
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', position: 'relative', zIndex: 1 }}>
                 <div style={{
                   width: '34px', height: '34px', borderRadius: '10px',
-                  background: `${card.color}15`, border: `1px solid ${card.color}30`,
+                  background: card.bg, border: `1px solid ${card.border}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Icon size={16} color={card.color} />
                 </div>
                 {card.pulse && (
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: card.color, boxShadow: `0 0 10px ${card.color}`, animation: 'dot 1.5s ease-in-out infinite', display: 'inline-block' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: card.color, boxShadow: `0 0 8px ${card.color}`, animation: 'dot 1.5s ease-in-out infinite', display: 'inline-block' }} />
                 )}
               </div>
-              <div style={{ color: card.color, fontWeight: 900, fontSize: '28px', lineHeight: 1, marginBottom: '4px', fontVariantNumeric: 'tabular-nums', position: 'relative', zIndex: 1, textShadow: `0 0 8px ${card.color}30` }}>
+              <div style={{ color: card.color, fontWeight: 900, fontSize: '28px', lineHeight: 1, marginBottom: '4px', fontVariantNumeric: 'tabular-nums', position: 'relative', zIndex: 1 }}>
                 <AnimatedCounter target={card.value} />
               </div>
-              <div style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 600, letterSpacing: '0.03em', lineHeight: 1.3, position: 'relative', zIndex: 1 }}>{card.label}</div>
+              <div style={{ color: '#475569', fontSize: '11px', fontWeight: 600, letterSpacing: '0.03em', lineHeight: 1.3, position: 'relative', zIndex: 1 }}>{card.label}</div>
             </motion.div>
           );
         })}

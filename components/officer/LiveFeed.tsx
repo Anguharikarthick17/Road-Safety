@@ -212,32 +212,31 @@ export default function LiveFeed() {
 
   return (
     <div style={{
-      background: 'rgba(15, 23, 42, 0.65)',
-      backdropFilter: 'blur(12px)',
-      border: '1px solid rgba(255, 255, 255, 0.08)',
+      background: '#ffffff',
+      border: '1px solid #e2e8f0',
       borderRadius: '20px', padding: '20px',
       height: '100%',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 16px rgba(255,255,255,0.01)',
+      boxShadow: '0 4px 20px rgba(15, 23, 42, 0.03)',
     }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             width: '36px', height: '36px', borderRadius: '11px',
-            background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.35)',
+            background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.28)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <TriangleAlert size={18} color="#ef4444" />
           </div>
           <div>
-            <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '15px' }}>Live Incident Feed</div>
-            <div style={{ color: '#94a3b8', fontSize: '11px' }}>Auto-updating every 8 seconds</div>
+            <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '15px' }}>Live Incident Feed</div>
+            <div style={{ color: '#64748b', fontSize: '11px' }}>Auto-updating every 8 seconds</div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px rgba(34,197,94,0.8)', animation: 'liveDot 1.8s ease-in-out infinite', display: 'inline-block' }} />
           <span style={{ color: '#22c55e', fontSize: '12px', fontWeight: 600 }}>LIVE</span>
-          <span style={{ color: '#cbd5e1', fontSize: '12px' }}>· {incidents.length} incidents</span>
+          <span style={{ color: '#475569', fontSize: '12px' }}>· {incidents.length} incidents</span>
         </div>
       </div>
 
@@ -257,14 +256,14 @@ export default function LiveFeed() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                whileHover={{ border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color : 'rgba(255, 255, 255, 0.2)'}` }}
+                whileHover={{ border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color : 'rgba(15, 23, 42, 0.15)'}` }}
                 style={{
-                  background: `linear-gradient(135deg, ${sev.bg}, rgba(15, 23, 42, 0.45))`,
-                  border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color + '60' : 'rgba(255, 255, 255, 0.08)'}`,
+                  background: `linear-gradient(135deg, ${sev.bg}, rgba(255, 255, 255, 0.8))`,
+                  border: `1px solid ${isCritical && inc.status === 'pending' ? sev.color + '50' : '#e2e8f0'}`,
                   borderRadius: '16px', padding: '16px',
                   boxShadow: isCritical && inc.status === 'pending'
                     ? `0 0 20px ${sev.glow}`
-                    : '0 4px 16px rgba(0,0,0,0.25)',
+                    : '0 4px 16px rgba(0,0,0,0.03)',
                   animation: isCritical && inc.status === 'pending' ? 'incidentPulse 2.5s ease-in-out infinite' : 'none',
                   cursor: 'pointer',
                   transition: 'border-color 0.25s, box-shadow 0.25s',
@@ -275,7 +274,7 @@ export default function LiveFeed() {
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px', marginBottom: '10px' }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px', flexWrap: 'wrap' }}>
-                      <span style={{ color: '#94a3b8', fontSize: '10px', fontWeight: 700, fontFamily: 'monospace' }}>{inc.id}</span>
+                      <span style={{ color: '#64748b', fontSize: '10px', fontWeight: 700, fontFamily: 'monospace' }}>{inc.id}</span>
                       <span style={{
                         padding: '2px 8px', borderRadius: '6px',
                         background: sev.bg, border: `1px solid ${sev.border}`,
@@ -292,18 +291,18 @@ export default function LiveFeed() {
                         {stat.label}
                       </span>
                     </div>
-                    <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '14px', marginBottom: '5px' }}>{inc.type}</div>
+                    <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '14px', marginBottom: '5px' }}>{inc.type}</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#cbd5e1', fontSize: '11px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#475569', fontSize: '11px' }}>
                         <MapPin size={11} color="#3b82f6" /> {inc.location}
                       </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#cbd5e1', fontSize: '11px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#475569', fontSize: '11px' }}>
                         <Clock size={11} /> {inc.time}
                       </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#cbd5e1', fontSize: '11px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#475569', fontSize: '11px' }}>
                         <User size={11} /> {inc.victims} victim{inc.victims !== 1 ? 's' : ''}
                       </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#cbd5e1', fontSize: '11px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#475569', fontSize: '11px' }}>
                         <Car size={11} /> {inc.vehicle}
                       </span>
                     </div>
@@ -311,7 +310,7 @@ export default function LiveFeed() {
                   <motion.div
                     animate={{ rotate: isExpanded ? 90 : 0 }}
                     transition={{ duration: 0.2 }}
-                    style={{ color: '#94a3b8', flexShrink: 0, marginTop: '2px' }}
+                    style={{ color: '#475569', flexShrink: 0, marginTop: '2px' }}
                   >
                     <ChevronRight size={16} />
                   </motion.div>
@@ -322,15 +321,15 @@ export default function LiveFeed() {
                   <div style={{
                     display: 'flex', alignItems: 'center', gap: '8px',
                     padding: '8px 12px', borderRadius: '10px',
-                    background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)',
+                    background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.18)',
                     marginBottom: '10px',
                   }}>
                     <Zap size={12} color="#60a5fa" />
-                    <span style={{ color: '#93c5fd', fontSize: '12px', fontWeight: 600 }}>
+                    <span style={{ color: '#1d4ed8', fontSize: '12px', fontWeight: 600 }}>
                       {(inc.assigned || assignment?.unit)} dispatched
                     </span>
                     {(inc.eta || assignment?.eta) && (
-                      <span style={{ color: '#cbd5e1', fontSize: '11px' }}>· ETA: {inc.eta || assignment?.eta}</span>
+                      <span style={{ color: '#475569', fontSize: '11px' }}>· ETA: {inc.eta || assignment?.eta}</span>
                     )}
                   </div>
                 )}
@@ -345,8 +344,8 @@ export default function LiveFeed() {
                       transition={{ duration: 0.3 }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '12px', marginTop: '2px' }}>
-                        <div style={{ color: '#cbd5e1', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Dispatch Unit</div>
+                      <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '12px', marginTop: '2px' }}>
+                        <div style={{ color: '#64748b', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>Dispatch Unit</div>
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                           {(['ambulance', 'police', 'fire'] as const).map(type => {
                             const cfg = unitLabels[type];
@@ -362,7 +361,7 @@ export default function LiveFeed() {
                                 style={{
                                   display: 'flex', alignItems: 'center', gap: '6px',
                                   padding: '8px 14px', borderRadius: '10px',
-                                  background: `${cfg.color}18`, border: `1px solid ${cfg.color}35`,
+                                  background: `${cfg.color}14`, border: `1px solid ${cfg.color}30`,
                                   color: cfg.color, fontSize: '12px', fontWeight: 700, cursor: 'pointer',
                                 }}
                               >
@@ -384,11 +383,11 @@ export default function LiveFeed() {
                       style={{
                         display: 'flex', alignItems: 'center', gap: '8px',
                         padding: '10px 14px', borderRadius: '10px', marginTop: '8px',
-                        background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)',
+                        background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)',
                       }}
                     >
                       <CheckCircle size={14} color="#22c55e" />
-                      <span style={{ color: '#4ade80', fontSize: '12px', fontWeight: 600 }}>Incident resolved — units returned to base</span>
+                      <span style={{ color: '#16a34a', fontSize: '12px', fontWeight: 600 }}>Incident resolved — units returned to base</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
