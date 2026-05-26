@@ -86,10 +86,12 @@ export default function MapPanel() {
 
   return (
     <div style={{
-      background: '#ffffff',
-      border: '1px solid #e2e8f0',
+      background: 'rgba(15, 23, 42, 0.65)',
+      backdropFilter: 'blur(12px)',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
       borderRadius: '20px', padding: '20px',
       height: '100%',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 16px rgba(255,255,255,0.01)',
     }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
@@ -98,8 +100,8 @@ export default function MapPanel() {
             <Map size={15} color="#60a5fa" />
           </div>
           <div>
-            <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '14px' }}>Live Dispatch Map</div>
-            <div style={{ color: '#475569', fontSize: '11px' }}>Chennai Metro Area</div>
+            <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '14px' }}>Live Dispatch Map</div>
+            <div style={{ color: '#94a3b8', fontSize: '11px' }}>Chennai Metro Area</div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 10px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '100px' }}>
@@ -111,10 +113,11 @@ export default function MapPanel() {
       {/* Map Canvas */}
       <div style={{
         position: 'relative', width: '100%', paddingBottom: '65%',
-        background: 'rgba(2,6,23,0.9)',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: 'rgba(2,6,23,0.95)',
+        border: '1px solid rgba(59,130,246,0.2)',
         borderRadius: '14px', overflow: 'hidden',
         marginBottom: '14px',
+        boxShadow: '0 0 15px rgba(59,130,246,0.05)',
       }}>
         {/* Grid lines */}
         <div style={{
@@ -230,7 +233,7 @@ export default function MapPanel() {
         {/* Overlay label */}
         <div style={{
           position: 'absolute', bottom: '8px', right: '10px',
-          color: '#1e3a5f', fontSize: '10px', fontWeight: 500,
+          color: '#64748b', fontSize: '10px', fontWeight: 500,
         }}>
           Simulation Map — Chennai Metro
         </div>
@@ -246,7 +249,7 @@ export default function MapPanel() {
         ].map(l => (
           <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: l.color, boxShadow: `0 0 5px ${l.color}` }} />
-            <span style={{ color: '#475569', fontSize: '11px', fontWeight: 500 }}>{l.label}</span>
+            <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 500 }}>{l.label}</span>
           </div>
         ))}
       </div>

@@ -106,27 +106,29 @@ export default function NotificationPanel() {
 
   return (
     <div style={{
-      background: '#ffffff',
-      border: '1px solid #e2e8f0',
+      background: 'rgba(15, 23, 42, 0.65)',
+      backdropFilter: 'blur(12px)',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
       borderRadius: '20px', padding: '20px',
       height: '100%',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 16px rgba(255,255,255,0.01)',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{
             width: '32px', height: '32px', borderRadius: '10px',
-            background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)',
+            background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.35)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <Bell size={15} color="#60a5fa" />
           </div>
           <div>
-            <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '14px' }}>Notifications</div>
-            <div style={{ color: '#475569', fontSize: '11px' }}>{visible.length} unread</div>
+            <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '14px' }}>Notifications</div>
+            <div style={{ color: '#94a3b8', fontSize: '11px' }}>{visible.length} unread</div>
           </div>
         </div>
         <span style={{
-          background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.25)',
+          background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.35)',
           borderRadius: '100px', padding: '2px 8px', color: '#f87171', fontSize: '11px', fontWeight: 700,
         }}>
           {visible.filter(n => n.type === 'alert').length} Critical
@@ -146,7 +148,7 @@ export default function NotificationPanel() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
                 style={{
-                  background: cfg.bg,
+                  background: `linear-gradient(135deg, ${cfg.bg}, rgba(15, 23, 42, 0.4))`,
                   border: `1px solid ${cfg.border}`,
                   borderRadius: '12px', padding: '12px 14px',
                   display: 'flex', alignItems: 'flex-start', gap: '10px',
@@ -160,12 +162,12 @@ export default function NotificationPanel() {
                   <Icon size={13} color={cfg.color} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ color: '#1e293b', fontSize: '12px', fontWeight: 500, lineHeight: 1.5, marginBottom: '3px' }}>{notif.msg}</p>
-                  <span style={{ color: '#475569', fontSize: '11px' }}>{notif.time}</span>
+                  <p style={{ color: '#f1f5f9', fontSize: '12px', fontWeight: 500, lineHeight: 1.5, marginBottom: '3px' }}>{notif.msg}</p>
+                  <span style={{ color: '#94a3b8', fontSize: '11px' }}>{notif.time}</span>
                 </div>
                 <button
                   onClick={() => setDismissed(d => [...d, notif.id])}
-                  style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', padding: '2px', flexShrink: 0 }}
+                  style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer', padding: '2px', flexShrink: 0 }}
                 >
                   <X size={12} />
                 </button>
@@ -174,8 +176,8 @@ export default function NotificationPanel() {
           })}
         </AnimatePresence>
         {visible.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '32px 16px', color: '#475569', fontSize: '13px' }}>
-            <CheckCircle size={24} color="#1e293b" style={{ margin: '0 auto 8px' }} />
+          <div style={{ textAlign: 'center', padding: '32px 16px', color: '#94a3b8', fontSize: '13px' }}>
+            <CheckCircle size={24} color="#475569" style={{ margin: '0 auto 8px' }} />
             All notifications cleared
           </div>
         )}

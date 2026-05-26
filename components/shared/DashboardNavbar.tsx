@@ -12,7 +12,7 @@ const roleConfig: Record<Role, { label: string; color: string; bg: string; borde
   public:     { label: 'Public',     color: '#1d4ed8', bg: '#eff6ff', border: '#bfdbfe', icon: UserCircle },
 };
 
-export default function DashboardNavbar({ notificationCount = 0 }: { notificationCount?: number }) {
+export default function DashboardNavbar({ notificationCount = 0, theme = 'light' }: { notificationCount?: number; theme?: 'light' | 'dark' }) {
   const router = useRouter();
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
@@ -34,12 +34,31 @@ export default function DashboardNavbar({ notificationCount = 0 }: { notificatio
   const cfg = role ? roleConfig[role] : null;
   const RoleIcon = cfg?.icon ?? Shield;
 
+  const isDark = theme === 'dark';
+  const navBg = isDark ? '#0b111e' : '#ffffff';
+  const borderBottomColor = isDark ? 'rgba(255, 255, 255, 0.08)' : '#e2e8f0';
+  const shadow = isDark ? '0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(29,78,216,0.06)' : '0 2px 8px rgba(0,0,0,0.06)';
+  
+  const logoTitleColor = isDark ? '#ffffff' : '#0f172a';
+  const logoSubColor = isDark ? '#94a3b8' : '#64748b';
+  const timeColor = isDark ? '#cbd5e1' : '#64748b';
+  const backBtnBg = isDark ? 'rgba(30, 41, 59, 0.45)' : '#f8fafc';
+  const backBtnBorder = isDark ? 'rgba(255, 255, 255, 0.15)' : '#cbd5e1';
+  const backBtnText = isDark ? '#cbd5e1' : '#334155';
+  const bellBg = isDark ? 'rgba(30, 41, 59, 0.45)' : '#f8fafc';
+  const bellBorder = isDark ? 'rgba(255, 255, 255, 0.15)' : '#e2e8f0';
+  const bellColor = isDark ? '#94a3b8' : '#64748b';
+
+  const roleBadgeBg = isDark ? 'rgba(220, 38, 38, 0.15)' : cfg?.bg;
+  const roleBadgeBorder = isDark ? 'rgba(220, 38, 38, 0.35)' : cfg?.border;
+  const roleBadgeText = isDark ? '#f87171' : cfg?.color;
+
   return (
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
-      style={{ position: 'sticky', top: 0, zIndex: 9999, background: '#ffffff', borderBottom: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+      style={{ position: 'sticky', top: 0, zIndex: 9999, background: navBg, borderBottom: `1px solid ${borderBottomColor}`, boxShadow: shadow }}
     >
       {/* Gov blue top line */}
       <div style={{ height: '3px', background: 'linear-gradient(90deg, #1e3a8a, #1d4ed8, #2563eb)' }} />
@@ -55,23 +74,23 @@ export default function DashboardNavbar({ notificationCount = 0 }: { notificatio
               gap: '6px',
               padding: '6px 12px',
               borderRadius: '7px',
-              border: '1px solid #cbd5e1',
-              color: '#334155',
+              border: `1px solid ${backBtnBorder}`,
+              color: backBtnText,
               fontSize: '12px',
               fontWeight: 600,
-              background: '#f8fafc',
+              background: backBtnBg,
               cursor: 'pointer',
               transition: 'all 0.2s',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.background = '#f1f5f9';
-              e.currentTarget.style.borderColor = '#94a3b8';
-              e.currentTarget.style.color = '#0f172a';
+              e.currentTarget.style.background = isDark ? 'rgba(30, 41, 59, 0.7)' : '#f1f5f9';
+              e.currentTarget.style.borderColor = isDark ? 'rgba(255, 255, 255, 0.25)' : '#94a3b8';
+              e.currentTarget.style.color = isDark ? '#ffffff' : '#0f172a';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = '#f8fafc';
-              e.currentTarget.style.borderColor = '#cbd5e1';
-              e.currentTarget.style.color = '#334155';
+              e.currentTarget.style.background = backBtnBg;
+              e.currentTarget.style.borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : backBtnBorder;
+              e.currentTarget.style.color = backBtnText;
             }}
           >
             <ArrowLeft size={13} /> Back
@@ -83,8 +102,8 @@ export default function DashboardNavbar({ notificationCount = 0 }: { notificatio
               <Shield size={16} color="white" />
             </div>
             <div>
-              <div style={{ color: '#64748b', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', lineHeight: 1 }}>NSER Platform</div>
-              <span style={{ color: '#0f172a', fontWeight: 800, fontSize: '15px', letterSpacing: '-0.3px' }}>
+              <div style={{ color: logoSubColor, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', lineHeight: 1 }}>NSER Platform</div>
+              <span style={{ color: logoTitleColor, fontWeight: 800, fontSize: '15px', letterSpacing: '-0.3px' }}>
                 Road<span style={{ color: '#1d4ed8' }}>SOS</span>
               </span>
             </div>
@@ -94,18 +113,18 @@ export default function DashboardNavbar({ notificationCount = 0 }: { notificatio
         {/* Center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
           {cfg && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: cfg.bg, border: `1px solid ${cfg.border}`, borderRadius: '6px', padding: '5px 12px' }}>
-              <RoleIcon size={12} color={cfg.color} />
-              <span style={{ color: cfg.color, fontWeight: 700, fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{cfg.label} Dashboard</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: roleBadgeBg, border: `1px solid ${roleBadgeBorder}`, borderRadius: '6px', padding: '5px 12px' }}>
+              <RoleIcon size={12} color={roleBadgeText} />
+              <span style={{ color: roleBadgeText, fontWeight: 700, fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{cfg.label} Dashboard</span>
             </div>
           )}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#64748b', fontSize: '12px', fontFamily: 'monospace' }}>
-            <Clock size={11} color="#94a3b8" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: timeColor, fontSize: '12px', fontFamily: 'monospace' }}>
+            <Clock size={11} color={isDark ? '#4b5563' : '#94a3b8'} />
             <span>{time}</span>
-            <span style={{ color: '#e2e8f0', margin: '0 2px' }}>·</span>
-            <span style={{ color: '#64748b' }}>{date}</span>
+            <span style={{ color: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0', margin: '0 2px' }}>·</span>
+            <span style={{ color: timeColor }}>{date}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '6px', padding: '4px 10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', background: isDark ? 'rgba(34,197,94,0.12)' : '#f0fdf4', border: isDark ? '1px solid rgba(34,197,94,0.3)' : '1px solid #bbf7d0', borderRadius: '6px', padding: '4px 10px' }}>
             <Activity size={11} color="#16a34a" />
             <span style={{ color: '#16a34a', fontSize: '10px', fontWeight: 700, letterSpacing: '0.07em' }}>LIVE</span>
           </div>
@@ -114,7 +133,7 @@ export default function DashboardNavbar({ notificationCount = 0 }: { notificatio
         {/* Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <div style={{ position: 'relative' }}>
-            <button style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b' }}>
+            <button style={{ width: '36px', height: '36px', borderRadius: '8px', background: bellBg, border: bellBorder, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: bellColor }}>
               <Bell size={15} />
             </button>
             {notificationCount > 0 && (
