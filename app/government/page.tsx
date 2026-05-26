@@ -7,6 +7,7 @@ import AccidentCharts from '@/components/government/AccidentCharts';
 import HeatmapPanel from '@/components/government/HeatmapPanel';
 import ReportPanel from '@/components/government/ReportPanel';
 import SmartInsights from '@/components/government/SmartInsights';
+import ReportPrintTemplate from '@/components/government/ReportPrintTemplate';
 import { motion } from 'framer-motion';
 
 function GovDashboardContent() {
@@ -70,6 +71,9 @@ function GovDashboardContent() {
           <ReportPanel />
         </div>
       </motion.div>
+
+      {/* Render Print Template */}
+      <ReportPrintTemplate />
 
       <style>{`
         @keyframes liveDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.6)} }

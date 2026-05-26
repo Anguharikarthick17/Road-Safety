@@ -42,6 +42,15 @@ export default function ReportPanel() {
       setDownloading(null);
       setDownloaded(prev => [...prev, id]);
       setTimeout(() => setDownloaded(prev => prev.filter(d => d !== id)), 3000);
+
+      // If it is a PDF export or a PDF report, trigger print
+      const isExportPdf = id === 'export-Export PDF';
+      const isReportPdf = id === 'r1' || id === 'r3' || id === 'r4';
+      if (isExportPdf || isReportPdf) {
+        if (typeof window !== 'undefined') {
+          window.print();
+        }
+      }
     }, 1800);
   };
 
@@ -114,11 +123,11 @@ export default function ReportPanel() {
                 display: 'flex', alignItems: 'center', gap: '12px',
                 padding: '12px 14px', borderRadius: '12px',
                 background: '#ffffff',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #f1f5f9',
                 transition: 'background 0.2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.04)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+              onMouseEnter={e => (e.currentTarget.style.background = '#f8fafc')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#ffffff')}
             >
               <div style={{
                 width: '34px', height: '34px', borderRadius: '10px',
@@ -128,7 +137,7 @@ export default function ReportPanel() {
                 <Icon size={15} color={report.color} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ color: '#e2e8f0', fontSize: '12px', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{report.name}</div>
+                <div style={{ color: '#0f172a', fontSize: '12px', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{report.name}</div>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '2px' }}>
                   <span style={{ color: '#475569', fontSize: '10px' }}>{report.type}</span>
                   <span style={{ color: '#475569', fontSize: '10px' }}>·</span>
@@ -144,10 +153,10 @@ export default function ReportPanel() {
                 whileTap={{ scale: 0.95 }}
                 style={{
                   width: '30px', height: '30px', borderRadius: '8px',
-                  background: isDone ? 'rgba(34,197,94,0.12)' : 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${isDone ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.08)'}`,
+                  background: isDone ? 'rgba(34,197,94,0.12)' : '#f8fafc',
+                  border: `1px solid ${isDone ? 'rgba(34,197,94,0.3)' : '#e2e8f0'}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', color: isDone ? '#4ade80' : '#64748b',
+                  cursor: 'pointer', color: isDone ? '#22c55e' : '#64748b',
                   flexShrink: 0,
                 }}
               >
