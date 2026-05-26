@@ -112,3 +112,10 @@ alter publication supabase_realtime add table public.shops;
 alter publication supabase_realtime add table public.ai_alerts;
 alter publication supabase_realtime add table public.notifications;
 alter publication supabase_realtime add table public.hotspots;
+
+-- Disable Row-Level Security (RLS) on all tables to allow direct anonymous read/write access (Development / Hackathon mode)
+ALTER TABLE public.incidents DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.shops DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.ai_alerts DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.notifications DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.hotspots DISABLE ROW LEVEL SECURITY;

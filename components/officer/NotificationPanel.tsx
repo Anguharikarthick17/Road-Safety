@@ -160,7 +160,7 @@ export default function NotificationPanel() {
                   <Icon size={13} color={cfg.color} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ color: '#e2e8f0', fontSize: '12px', fontWeight: 500, lineHeight: 1.5, marginBottom: '3px' }}>{notif.msg}</p>
+                  <p style={{ color: '#1e293b', fontSize: '12px', fontWeight: 500, lineHeight: 1.5, marginBottom: '3px' }}>{notif.msg}</p>
                   <span style={{ color: '#475569', fontSize: '11px' }}>{notif.time}</span>
                 </div>
                 <button

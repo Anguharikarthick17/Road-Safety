@@ -89,7 +89,8 @@ export default function HeatmapPanel() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {spots.map((spot, i) => {
-            const cfg = severityConfig[spot.severity];
+            const severity: Severity = (spot.severity && spot.severity in severityConfig) ? spot.severity : 'medium';
+            const cfg = severityConfig[severity];
             return (
               <motion.div
                 key={spot.id}
