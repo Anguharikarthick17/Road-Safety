@@ -82,7 +82,7 @@ export default function NotificationPanel() {
           schema: 'public',
           table: 'notifications',
         },
-        (payload) => {
+        (payload: any) => {
           const newItem = payload.new;
           setItems(prev => [
             {

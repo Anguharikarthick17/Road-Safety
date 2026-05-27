@@ -139,7 +139,7 @@ export default function LiveFeed() {
           schema: 'public',
           table: 'incidents',
         },
-        (payload) => {
+        (payload: any) => {
           if (payload.eventType === 'INSERT') {
             const newItem = payload.new;
             const newIncident: Incident = {

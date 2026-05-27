@@ -69,7 +69,7 @@ export default function AIAlerts() {
           schema: 'public',
           table: 'ai_alerts',
         },
-        (payload) => {
+        (payload: any) => {
           const newItem = payload.new;
           setAlerts(prev => [
             {
